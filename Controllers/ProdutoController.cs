@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using VsCodeTesteApi.Models;
 using VsCodeTesteApi.Repositories;
+using VsCodeTesteApi.Translate;
+using VsCodeTesteApi.ViewModels.ProdutoViewModel;
 
 namespace VsCodeTesteApi.Controllers
 {
@@ -26,12 +28,24 @@ namespace VsCodeTesteApi.Controllers
 		}
 
 		[HttpPost]
-		[Route("ProdutoController/produtos")]
+		[Route("v1/ProdutoController/produtos")]
 		public void Post([FromBody]Produto produto)
 		{
 			produto.DataAtualizacao = DateTime.Now;
 			produto.DataCriacao = DateTime.Now;
 			this._produtoRepositorio.CadastrarProduto(produto);
+		}
+
+		[HttpPost]
+		[Route("v2/ProdutoController/produtos")]
+		public string Post([FromBody]ProdutoEditViewModel produtoEditViewModel)
+		{
+			produtoEditViewModel.Validate();
+			if(produtoEditViewModel.Valid)
+				return produtoEditViewModel.Notifications.ToString();
+			
+			this._produtoRepositorio.CadastrarProduto(produtoEditViewModel.ToModel());
+			return "Não foi possível cadastrar o produto!";
 		}
 	}
 }
