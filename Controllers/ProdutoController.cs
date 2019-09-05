@@ -41,11 +41,11 @@ namespace VsCodeTesteApi.Controllers
 		public string Post([FromBody]ProdutoEditViewModel produtoEditViewModel)
 		{
 			produtoEditViewModel.Validate();
-			if(produtoEditViewModel.Valid)
+			if(!produtoEditViewModel.Valid)
 				return produtoEditViewModel.Notifications.ToString();
-			
+				
 			this._produtoRepositorio.CadastrarProduto(produtoEditViewModel.ToModel());
-			return "Não foi possível cadastrar o produto!";
+			return "Produto cadastrado com sucesso!";
 		}
 	}
 }
