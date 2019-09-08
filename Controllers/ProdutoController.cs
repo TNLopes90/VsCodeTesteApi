@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using VsCodeTesteApi.ActionFilter;
 using VsCodeTesteApi.Models;
 using VsCodeTesteApi.Repositories;
 using VsCodeTesteApi.Translate;
@@ -39,12 +40,9 @@ namespace VsCodeTesteApi.Controllers
 
 		[HttpPost]
 		[Route("v2/ProdutoController/produtos")]
+		[ValidationFilterAttribute]
 		public ResultadoViewModel Post([FromBody]ProdutoEditViewModel produtoEditViewModel)
-		{
-			produtoEditViewModel.Validate();
-			if(!produtoEditViewModel.Valid)
-				return new ResultadoViewModel().CreateResultadoViewModel(false, "Não foi possível cadastrar o produto!", produtoEditViewModel.Notifications);
-				
+		{	
 			this._produtoRepositorio.CadastrarProduto(produtoEditViewModel.ToModel());
 			return new ResultadoViewModel().CreateResultadoViewModel(true, "Produto cadastrado com sucesso!", produtoEditViewModel);
 		}

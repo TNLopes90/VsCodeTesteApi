@@ -4,7 +4,7 @@ using Flunt.Validations;
 
 namespace VsCodeTesteApi.ViewModels.ProdutoViewModel
 {
-	public class ProdutoEditViewModel : Notifiable, IValidatable
+	public class ProdutoEditViewModel : PadraoViewModel
 	{
 		public int Id { get; set; }
 		public string Titulo { get; set; }
@@ -15,7 +15,7 @@ namespace VsCodeTesteApi.ViewModels.ProdutoViewModel
 		public int IdCategoria { get; set; }
 		public DateTime? DataCriacao { get; set; }
 
-		public void Validate() => AddNotifications
+		public override void Validate() => AddNotifications
 			(
 				new Contract()
 					.HasMaxLen(Titulo, 300, "Titulo", "O Título não pode ter mais de 300 caracteres!")
