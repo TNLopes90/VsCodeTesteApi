@@ -15,8 +15,7 @@ namespace VsCodeTesteApi.Translate
 			Quantidade = produtoEditViewModel.Quantidade,
 			Imagem = produtoEditViewModel.Imagem,
 			IdCategoria = produtoEditViewModel.IdCategoria,
-			DataAtualizacao = DateTime.Now,
-			Categoria = new Categoria() { Id = produtoEditViewModel.IdCategoria }
+			DataAtualizacao = DateTime.Now
 		};
 
 		public static ProdutoListViewModel ToViewModel(this Produto produto) => new ProdutoListViewModel

@@ -17,7 +17,7 @@ namespace VsCodeTesteApi.Data.Maps
 			produtoBuilder.Property(p => p.Imagem).IsRequired().HasMaxLength(1024).HasColumnType("varchar(1024)");
 			produtoBuilder.Property(p => p.DataCriacao).IsRequired();
 			produtoBuilder.Property(p => p.DataAtualizacao).IsRequired();
-			produtoBuilder.HasOne(p => p.Categoria).WithMany(c => c.Produtos);
+			produtoBuilder.HasOne(p => p.Categoria).WithMany(c => c.Produtos).HasForeignKey(c => c.IdCategoria);
 		}
 	}
 }
