@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Data.DataContext;
+using Microsoft.EntityFrameworkCore;
 using VsCodeTesteApi.Models;
 
 namespace VsCodeTesteApi.Repositories
@@ -18,7 +20,10 @@ namespace VsCodeTesteApi.Repositories
 
 		public IEnumerable<Categoria> RecuperarCategorias()
 		{
-			return this._dataContext.Categorias;
+			return this._dataContext.Categorias
+				.Include(c => c.Produtos)
+				.AsNoTracking()
+				.ToList();
 		}
 
 		public void CadastrarCategoria(Categoria categoria)

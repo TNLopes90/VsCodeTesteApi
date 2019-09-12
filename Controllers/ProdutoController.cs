@@ -17,7 +17,7 @@ namespace VsCodeTesteApi.Controllers
 
 		[HttpGet]
 		[Route("ProdutoController/produtos")]
-		public IEnumerable<Produto> Get()
+		public IEnumerable<ProdutoListViewModel> Get()
 		{
 			return this._produtoRepositorio.RecuperarProdutos();
 		}

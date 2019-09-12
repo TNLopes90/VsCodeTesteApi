@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using VsCodeTesteApi.Repositories;
 
 namespace VsCodeTesteApi
@@ -12,6 +13,7 @@ namespace VsCodeTesteApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddResponseCompression();
 
             services.AddScoped<DataContext, DataContext>();
             services.AddTransient<ProdutoRepositorio, ProdutoRepositorio>();
@@ -24,6 +26,7 @@ namespace VsCodeTesteApi
                 app.UseDeveloperExceptionPage();
             
             app.UseMvc();
+            app.UseResponseCompression();
         }
     }
 }

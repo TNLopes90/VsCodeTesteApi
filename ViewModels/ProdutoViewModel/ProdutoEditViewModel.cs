@@ -1,6 +1,7 @@
 using System;
 using Flunt.Notifications;
 using Flunt.Validations;
+using VsCodeTesteApi.Models;
 
 namespace VsCodeTesteApi.ViewModels.ProdutoViewModel
 {
